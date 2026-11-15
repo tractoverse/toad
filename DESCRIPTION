@@ -48,4 +48,5 @@ Imports:
     fiber
 Suggests:
     cli,
+    pkgdown,
     tinytest
