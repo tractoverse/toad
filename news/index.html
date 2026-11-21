@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">toad</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -39,9 +39,9 @@
     </div>
 
     <div class="section level2">
-<h2 class="pkg-version" data-toc-text="1.0.0" id="toad-100">toad 1.0.0<a class="anchor" aria-label="anchor" href="#toad-100"></a></h2>
+<h2 class="pkg-version" data-toc-text="0.1.0" id="toad-010">toad 0.1.0<a class="anchor" aria-label="anchor" href="#toad-010"></a></h2>
 <div class="section level3">
-<h3 id="main-changes-1-0-0">Main changes<a class="anchor" aria-label="anchor" href="#main-changes-1-0-0"></a></h3>
+<h3 id="main-changes-0-1-0">Main changes<a class="anchor" aria-label="anchor" href="#main-changes-0-1-0"></a></h3>
 <ul><li>
 <strong>First release of <code>toad</code></strong> (Tractography Open Atlas Data), renamed from the previous <code>mascot</code> prototype.</li>
 <li>
@@ -60,22 +60,22 @@
 <strong>Minimum R version raised to 4.1.0</strong>.</li>
 </ul></div>
 <div class="section level3">
-<h3 id="bug-fixes-1-0-0">Bug fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-1-0-0"></a></h3>
+<h3 id="bug-fixes-0-1-0">Bug fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-0-1-0"></a></h3>
 <ul><li>Correct DOI syntax in documentation (<code>\doi{...}</code>).</li>
 <li>Reliable error messages; <code>cli</code> is now optional (base-R fallback).</li>
 </ul></div>
 <div class="section level3">
-<h3 id="asset-generation-design-notes-1-0-0">Asset-generation design notes<a class="anchor" aria-label="anchor" href="#asset-generation-design-notes-1-0-0"></a></h3>
+<h3 id="asset-generation-design-notes-0-1-0">Asset-generation design notes<a class="anchor" aria-label="anchor" href="#asset-generation-design-notes-0-1-0"></a></h3>
 <p>The following notes document how the two GitHub releases were generated. They are maintained for contributors who regenerate or extend the atlas data.</p>
 <div class="section level4">
-<h4 id="hcp1065-atlas-1-0-0">HCP1065 atlas<a class="anchor" aria-label="anchor" href="#hcp1065-atlas-1-0-0"></a></h4>
+<h4 id="hcp1065-atlas-0-1-0">HCP1065 atlas<a class="anchor" aria-label="anchor" href="#hcp1065-atlas-0-1-0"></a></h4>
 <p>The 87 HCP1065 bundles are published in a <strong>single GitHub release</strong> (<code>hcp1065</code>), each as one <code>.rds</code> file. Key choices:</p>
 <ul><li><p><strong>One release, 87 assets.</strong> The atlas is population-averaged (one streamline set per bundle, no per-subject variation), so the total file count is small enough to fit comfortably in a single release without hitting GitHub’s 2 GB per-file or 2 GB per-release soft limits.</p></li>
 <li><p><strong><code>compress = "xz"</code></strong> (LZMA). Because the job runs sequentially on a single runner and the file count is low, we can afford the slower but space-optimal XZ compression (typically 10–30 % smaller than gzip at comparable decompression speed). Download time for end users is therefore minimised.</p></li>
 <li><p><strong>Single sequential workflow job.</strong> All bundles are converted in one <code>Rscript data-raw/hcp1065.R</code> step. The source archive is a modest ZIP downloaded once; no range-request tricks are needed.</p></li>
 </ul></div>
 <div class="section level4">
-<h4 id="tractseg-data-1-0-0">TractSeg data<a class="anchor" aria-label="anchor" href="#tractseg-data-1-0-0"></a></h4>
+<h4 id="tractseg-data-0-1-0">TractSeg data<a class="anchor" aria-label="anchor" href="#tractseg-data-0-1-0"></a></h4>
 <p>The 72 × 105 = 7,560 per-subject bundle files present very different constraints from the HCP1065 atlas. Key design choices and trade-offs:</p>
 <ul><li><p><strong>One release per bundle (72 releases, <code>tractseg-&lt;bundle_name&gt;</code>).</strong> Putting all 7,560 files in a single release would be unwieldy (GitHub UI, API pagination, accidental full-release downloads). One release per bundle gives users a clean, addressable unit and enables partial re-runs when only specific bundles need to be updated.</p></li>
 <li><p><strong>GitHub Actions matrix parallelism (up to 216 concurrent jobs).</strong> Each bundle is split into 3 subject batches (≈ 35 subjects each), yielding 72 × 3 = 216 matrix configurations — just under GitHub’s hard limit of 256. Each runner handles one batch end-to-end (fetch → convert → upload), so the full 72-bundle conversion completes in roughly the time of the slowest single batch rather than 72 × 105 subject-jobs in sequence.</p></li>
@@ -85,7 +85,7 @@
 <li><p><strong>Empty-TRK guard.</strong> A TRK file whose size is ≤ 1,000 bytes contains only a header with no streamlines. Such files are silently skipped rather than producing a corrupt <code>.rds</code>, keeping the subject count accurate.</p></li>
 </ul></div>
 <div class="section level4">
-<h4 id="workflow-reliability-improvements-1-0-0">Workflow reliability improvements<a class="anchor" aria-label="anchor" href="#workflow-reliability-improvements-1-0-0"></a></h4>
+<h4 id="workflow-reliability-improvements-0-1-0">Workflow reliability improvements<a class="anchor" aria-label="anchor" href="#workflow-reliability-improvements-0-1-0"></a></h4>
 <p>The GitHub Actions workflow that publishes the 72 per-bundle TractSeg releases has been hardened against Zenodo rate-limiting and GitHub’s matrix size limit:</p>
 <ul><li><p><strong>Subject batching.</strong> Each bundle’s 105 subjects are split into 3 batches (≈ 35 subjects each) processed by separate runners. At ≈ 12 min/subject on a 2-core runner this yields ≈ 210 min per job — within the 300-minute timeout — and keeps the total matrix size at 72 × 3 = 216, below GitHub’s hard cap of 256 configurations.</p></li>
 <li><p><strong>Race-safe release upload.</strong> Because multiple batches for the same bundle run concurrently, release creation is idempotent: each batch attempts <code>gh release create ... || true</code> (concurrent creators all succeed silently) before calling <code>gh release upload --clobber</code>. Since every per-subject RDS filename is unique, <code>--clobber</code> never overwrites another batch’s assets.</p></li>

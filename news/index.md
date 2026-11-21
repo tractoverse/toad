@@ -1,6 +1,6 @@
 # Changelog
 
-## toad 1.0.0
+## toad 0.1.0
 
 ### Main changes
 
