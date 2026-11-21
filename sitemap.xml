@@ -1,6 +1,10 @@
 <urlset xmlns = 'http://www.sitemaps.org/schemas/sitemap/0.9'>
 <url><loc>https://tractoverse.github.io/toad/404.html</loc></url>
+<url><loc>https://tractoverse.github.io/toad/LICENSE-text.html</loc></url>
 <url><loc>https://tractoverse.github.io/toad/LICENSE.html</loc></url>
+<url><loc>https://tractoverse.github.io/toad/articles/index.html</loc></url>
+<url><loc>https://tractoverse.github.io/toad/articles/toad-api.html</loc></url>
+<url><loc>https://tractoverse.github.io/toad/articles/toad.html</loc></url>
 <url><loc>https://tractoverse.github.io/toad/authors.html</loc></url>
 <url><loc>https://tractoverse.github.io/toad/index.html</loc></url>
 <url><loc>https://tractoverse.github.io/toad/news/index.html</loc></url>

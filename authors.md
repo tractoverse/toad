@@ -2,7 +2,7 @@
 
 ## Authors
 
-- **Aymeric Stamm**. Author, maintainer.
+- **Aymeric Stamm**. Author, maintainer, copyright holder.
   [](https://orcid.org/0000-0002-8725-3654)
 
 - **Fang-Cheng Yeh**. Contributor.  
@@ -44,12 +44,12 @@ Source:
 [`DESCRIPTION`](https://github.com/tractoverse/toad/blob/main/DESCRIPTION)
 
 Stamm A (2026). *toad: Tractography Open Atlas Data*. R package version
-0.1.0, <https://github.com/tractoverse/toad>.
+1.0.0, <https://github.com/tractoverse/toad>.
 
     @Manual{,
       title = {toad: Tractography Open Atlas Data},
       author = {Aymeric Stamm},
       year = {2026},
-      note = {R package version 0.1.0},
+      note = {R package version 1.0.0},
       url = {https://github.com/tractoverse/toad},
     }

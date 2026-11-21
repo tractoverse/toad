@@ -1,36 +1,50 @@
 # Changelog
 
-## toad 0.1.0
+## toad 1.0.0
 
-### HCP1065 atlas
+### Main changes
 
-#### License correction
+- **First release of `toad`** (Tractography Open Atlas Data), renamed
+  from the previous `mascot` prototype.
+- **License switched to MIT** for the package code. The underlying atlas
+  data keep their original licenses: HCP1065 under CC BY-SA 4.0 and
+  TractSeg under CC BY-NC 4.0 (non-commercial use only).
+- **Added
+  [`import_bundle()`](https://tractoverse.github.io/toad/reference/import_bundle.md)**
+  as the single entry point to both datasets
+  (`import_bundle("HCP1065", ...)` and
+  `import_bundle("TractSeg", ...)`), superseding the previous
+  per-dataset import functions.
+- **New `TractSeg` dataset** — per-subject white matter bundle
+  segmentations of 72 tracts in 105 HCP Young Adult subjects,
+  redistributed from Zenodo ([DOI:
+  10.5281/zenodo.1477956](https://doi.org/10.5281/zenodo.1477956)) with
+  permission of the original authors. Data are downloaded on demand from
+  GitHub releases; nothing is bundled with the package.
+- **Subject selection for `TractSeg`**: import all subjects, a random
+  sample of `n`, a specific vector of subject IDs, or a single subject.
+- **100 % test coverage** of the R code (issue
+  [\#12](https://github.com/tractoverse/toad/issues/12)).
+- **Vignettes**: user-facing
+  [`vignette("toad")`](https://tractoverse.github.io/toad/articles/toad.md)
+  and developer-facing
+  [`vignette("toad-api")`](https://tractoverse.github.io/toad/articles/toad-api.md).
+- **Minimum R version raised to 4.1.0**.
 
-The HCP1065 population-averaged tractography atlas is published by
-Fang-Cheng Yeh under the **Creative Commons Attribution-ShareAlike 4.0
-International (CC BY-SA 4.0)** license
-(<https://creativecommons.org/licenses/by-sa/4.0/>), not CC BY 4.0 as
-previously documented. `DESCRIPTION`, the roxygen block in
-[`R/HCP1065.R`](https://tractoverse.github.io/toad/news/R/HCP1065.R),
-and the GitHub release notes for the `hcp1065` tag have all been
-corrected accordingly. A no-endorsement disclaimer has also been added
-to the release notes.
+### Bug fixes
 
-#### Attribution and citation
+- Correct DOI syntax in documentation (`\doi{...}`).
+- Reliable error messages; `cli` is now optional (base-R fallback).
 
-Please cite the original work when using HCP1065 data:
+### Asset-generation design notes
 
-> Yeh FC. Population-based tract-to-region connectome of the human brain
-> and its hierarchical topology. *Nat Commun* **13**, 4933 (2022).
-> <https://doi.org/10.1038/s41467-022-32595-4>
+The following notes document how the two GitHub releases were generated.
+They are maintained for contributors who regenerate or extend the atlas
+data.
 
-The atlas originates from the Human Connectome Project Young Adult
-dataset; users must also comply with the applicable [HCP data-use
-terms](https://www.humanconnectome.org/study/hcp-young-adult/document/wu-minn-hcp-consortium-open-access-data-use-terms).
+#### HCP1065 atlas
 
-#### Asset-generation design notes
-
-The 87 HCP1065 bundles are all published in a **single GitHub release**
+The 87 HCP1065 bundles are published in a **single GitHub release**
 (`hcp1065`), each as one `.rds` file. Key choices:
 
 - **One release, 87 assets.** The atlas is population-averaged (one
@@ -49,44 +63,7 @@ The 87 HCP1065 bundles are all published in a **single GitHub release**
   `Rscript data-raw/hcp1065.R` step. The source archive is a modest ZIP
   downloaded once; no range-request tricks are needed.
 
-------------------------------------------------------------------------
-
-### TractSeg data redistribution
-
-The TractSeg per-subject bundle data (72 white matter tracts, 105 HCP
-Young Adult subjects) are redistributed from the Zenodo archive
-(<https://zenodo.org/records/1477956>, DOI: 10.5281/zenodo.1477956) with
-the explicit permission of the original authors.
-
-#### License
-
-**Creative Commons Attribution–NonCommercial 4.0 International (CC BY-NC
-4.0)** — non-commercial use only. See
-<https://creativecommons.org/licenses/by-nc/4.0/>.
-
-#### Attribution and citation
-
-Please cite the original TractSeg publication:
-
-> Wasserthal J, Neher P, Maier-Hein KH. TractSeg — Fast and accurate
-> white matter tract segmentation. *NeuroImage* **183**, 239–253 (2018).
-> <https://doi.org/10.1016/j.neuroimage.2018.07.070>
-
-Raw data archived at Zenodo: <https://zenodo.org/records/1477956>.
-
-The source tractograms are derived from the Human Connectome Project
-Young Adult dataset; users must comply with the applicable [HCP data-use
-terms](https://www.humanconnectome.org/study/hcp-young-adult/document/wu-minn-hcp-consortium-open-access-data-use-terms).
-
-#### Disclaimer
-
-This redistribution does not imply endorsement by the original authors,
-DKFZ, Zenodo, HCP, or any affiliated institution. Jakob Wasserthal,
-Peter Neher, and Klaus H. Maier-Hein are listed as contributors (`ctb`)
-in `DESCRIPTION` to acknowledge their authorship of the source data;
-this does not imply their endorsement of the `toad` package.
-
-#### Asset-generation design notes
+#### TractSeg data
 
 The 72 × 105 = 7,560 per-subject bundle files present very different
 constraints from the HCP1065 atlas. Key design choices and trade-offs:
@@ -160,16 +137,3 @@ matrix size limit:
 - **Reduced concurrency.** The matrix is capped at `max-parallel: 5` and
   each job uses 2 parallel download workers, keeping peak simultaneous
   Zenodo connections at ≤ 10.
-
-### Comparison with HCP1065
-
-| Aspect | HCP1065 | TractSeg |
-|----|----|----|
-| Nature of data | Population average | Per-subject (105 subjects) |
-| Total assets | 87 `.rds` files | 7,560 `.rds` files |
-| Release structure | 1 release, 87 assets | 72 releases, 105 assets each |
-| Compression | `xz` (slow, small) | `gzip` (fast, modest overhead) |
-| Workflow jobs | 1 sequential job | 216 parallel matrix jobs (72 bundles × 3 batches) |
-| Source download | Full ZIP once | Range requests per bundle |
-| In-runner parallelism | None needed | `mclapply` over subjects |
-| License | CC BY-SA 4.0 | CC BY-NC 4.0 |

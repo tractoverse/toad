@@ -1,9 +1,17 @@
 # toad
 
-The goal of [**toad**](https://tractoverse.github.io/toad/) is to
-provide easy access to recent macroscale structural connectomes of the
-Human brain obtained from diffusion MRI data through diffusion modeling
-and subsequent so-called tractography.
+[**toad**](https://tractoverse.github.io/toad/) (Tractography Open Atlas
+Data) provides easy access to reference white matter tractography
+atlases of the human brain, for benchmarking and anomaly-detection
+studies of brain microstructure. It is the data layer of the
+[{tractoverse}](https://github.com/tractoverse/tractoverse) package
+family: imported bundles are returned as the `streamline`, `bundle`, and
+`bundle_set` S7 classes of the
+[{fiber}](https://tractoverse.github.io/fiber/) package.
+
+Data are hosted as GitHub releases in the package repository and
+downloaded on demand — no bulky data files are bundled with the package
+itself.
 
 ## Installation
 
@@ -18,101 +26,85 @@ remotes::install_github("tractoverse/toad")
 
 ## Datasets
 
-**toad** provides access to two large white matter tractography
-datasets, both stored as
-[`fiber::bundle`](https://tractoverse.github.io/fiber/) objects and
-fetched on demand — no bulky data files are bundled with the package
-itself.
+Two datasets are available
+([`available_datasets()`](https://tractoverse.github.io/toad/reference/available_datasets.md)):
+
+| Dataset | Bundles | License |
+|----|----|----|
+| `HCP1065` | 87 population-averaged white matter bundles | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) |
+| `TractSeg` | 72 tracts segmented in each of 105 HCP subjects | [CC BY-NC 4.0](https://creativecommons.org/licenses/by-nc/4.0/) — non-commercial |
+
+Both datasets originate from the Human Connectome Project Young Adult
+dataset; users must comply with the [HCP data-use
+terms](https://www.humanconnectome.org/study/hcp-young-adult/document/wu-minn-hcp-consortium-open-access-data-use-terms).
 
 ### HCP1065 population-averaged atlas
 
-A whole-brain tractography atlas averaged across 1,065 healthy adults
-from the [Human Connectome
-Project](https://www.humanconnectome.org/study/hcp-young-adult). It
-contains 87 white matter bundles, each represented as a single
-population-level streamline set.
+A whole-brain tractography atlas averaged across 1,065 healthy adults,
+containing 87 white matter bundles each represented as a single
+population-level streamline set. Please cite the original work when
+using it:
+
+> Yeh FC. Population-based tract-to-region connectome of the human brain
+> and its hierarchical topology. *Nat Commun* **13**, 4933 (2022).
+> <https://doi.org/10.1038/s41467-022-32595-4>
 
 ``` r
 
 # List all available bundles
 available_bundles("HCP1065")
 
-# Load one bundle directly by name
-cst_left <- toad::import_bundle(dataset = "HCP1065", bundle = "CST_left")
-# Or use the convenience function
-cst_left <- toad::HCP1065_CST_L()
+# Load one bundle by name
+cst_left <- import_bundle("HCP1065", "Left Corticospinal Tract")
+# Or use the convenience accessor
+cst_left <- HCP1065_CST_L()
 ```
-
-**License:** [CC BY-SA
-4.0](https://creativecommons.org/licenses/by-sa/4.0/).
-
-**Citation:**
-
-> Yeh FC. Population-based tract-to-region connectome of the human brain
-> and its hierarchical topology. *Nat Commun* **13**, 4933 (2022).
-> <https://doi.org/10.1038/s41467-022-32595-4>
-
-Users must also comply with the [HCP data-use
-terms](https://www.humanconnectome.org/study/hcp-young-adult/document/wu-minn-hcp-consortium-open-access-data-use-terms).
 
 ### TractSeg per-subject bundles
 
 72 white matter tracts segmented in each of 105 HCP Young Adult subjects
 using [TractSeg](https://github.com/MIC-DKFZ/TractSeg), redistributed
 from the [Zenodo archive](https://zenodo.org/records/1477956) (DOI:
-[10.5281/zenodo.1477956](https://doi.org/10.5281/zenodo.1477956)). Each
-bundle is downloaded on first use and cached locally.
+[10.5281/zenodo.1477956](https://doi.org/10.5281/zenodo.1477956)).
+Because the segmentation is per-subject, this dataset supports
+population-style analyses. Please cite the original TractSeg
+publication:
+
+> Wasserthal J, Neher P, Maier-Hein KH. TractSeg — Fast and accurate
+> white matter tract segmentation. *NeuroImage* **183**, 239–253 (2018).
+> <https://doi.org/10.1016/j.neuroimage.2018.07.070>
 
 ``` r
 
 # List all available TractSeg bundles
 available_bundles("TractSeg")
 
-# Import one bundle (downloads on first call, cached afterwards)
-cst_left <- toad::import_bundle(dataset = "TractSeg", bundle = "CST_left", subjects = 1L)
-# Or use the convenience function
-cst_left <- toad::TractSeg_CST_left(subjects = 1L)
+# A single subject — returns a bundle
+af_left <- import_bundle("TractSeg", "Left Arcuate Fasciculus", subjects = "599469")
+
+# A random sample of 10 subjects — returns a bundle_set
+af_sample <- import_bundle("TractSeg", "Left Arcuate Fasciculus", subjects = 10L)
 ```
 
-**License:** [CC BY-NC
-4.0](https://creativecommons.org/licenses/by-nc/4.0/) — **non-commercial
-use only.**
-
-**Citation:**
-
-> Wasserthal J, Neher P, Maier-Hein KH. TractSeg — Fast and accurate
-> white matter tract segmentation. *NeuroImage* **183**, 239–253 (2018).
-> <https://doi.org/10.1016/j.neuroimage.2018.07.070>
-
-Users must also comply with the [HCP data-use
-terms](https://www.humanconnectome.org/study/hcp-young-adult/document/wu-minn-hcp-consortium-open-access-data-use-terms).
-
-### Bundle objects
+## Bundle objects
 
 All bundles are returned as
 [`fiber::bundle`](https://tractoverse.github.io/fiber/reference/bundle.html)
-objects with two slots:
+objects:
 
 - `@streamlines` — a list of `streamline` objects, each carrying:
+  - `@points` — a $`P \times 3`$ matrix of 3D coordinates for the $`P`$
+    points along the streamline;
+  - `@point_data` — a list of per-point attributes (e.g. FA, MD);
+  - `@streamline_data` — a list of per-streamline scalars.
+- `@bundle_data` — bundle-level metadata (name, source dataset, etc.).
 
-  - `@points` - a $`P \times 3`$ matrix of 3D coordinates for the $`P`$
-    points along the streamline.
-  - `@point_data` - a list of numeric-only vectors of length $`P`$
-    containing point-level data (e.g., FA, MD, etc.) for each point
-    along the streamline.
-  - `@streamline_data` - a list of scalars (of any type) containing
-    streamline data that are not common across all streamlines in the
-    bundle.
-
-- `@streamline_data` - a list of vectors containing streamline-level
-  data that are common across all streamlines in the bundle.
-
-- `@bundle_data` — a list of scalars (of any type) containing metadata
-  about the bundle (name, source dataset, etc.).
-
-See the [fiber package
-documentation](https://tractoverse.github.io/fiber/) for full details on
-working with these objects.
+Multi-subject imports return a
+[`fiber::bundle_set`](https://tractoverse.github.io/fiber/reference/bundle_set.html).
+See the [getting
+started](https://tractoverse.github.io/toad/articles/toad.html) vignette
+for details, and the [{fiber}](https://tractoverse.github.io/fiber/)
+package for working with these objects.
 
 # Package index
 
@@ -447,3 +439,16 @@ working with these objects.
 - [`import_bundle()`](https://tractoverse.github.io/toad/reference/import_bundle.md)
   : Import a bundle hosted in GitHub releases
 
+# Articles
+
+### Vignettes
+
+- [Getting started with
+  toad](https://tractoverse.github.io/toad/articles/toad.md):
+
+  A practical introduction to the toad package: discovering atlas
+  datasets and bundles, importing white matter bundles with
+  import_bundle(), and working with the resulting fiber objects.
+
+- [The toad package
+  API](https://tractoverse.github.io/toad/articles/toad-api.md):

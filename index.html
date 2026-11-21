@@ -15,8 +15,8 @@
 <script src="deps/bootstrap-5.3.8/bootstrap.bundle.min.js"></script><link href="deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
 <link href="deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
 <script src="deps/headroom-0.11.0/headroom.min.js"></script><script src="deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="deps/search-1.0.0/fuse.min.js"></script><script src="deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="pkgdown.js"></script><meta property="og:title" content="Tractography Open Atlas Data">
-<meta name="description" content="A data package providing access to macroscale structural connectomes of the human brain derived from diffusion MRI via tractography. Includes two datasets: (1) the HCP1065 population-averaged tractography atlas (Yeh 2022, CC BY-SA 4.0) and (2) per-subject TractSeg white matter bundle segmentations from 105 HCP Young Adult subjects (Wasserthal et al. 2018, CC BY-NC 4.0 -- non-commercial use only). Both datasets originate from the Human Connectome Project and are subject to the applicable HCP data-use terms. Source TRK files have been converted to R fiber::bundle objects (.rds); no spatial modifications were made to the streamline data.">
-<meta property="og:description" content="A data package providing access to macroscale structural connectomes of the human brain derived from diffusion MRI via tractography. Includes two datasets: (1) the HCP1065 population-averaged tractography atlas (Yeh 2022, CC BY-SA 4.0) and (2) per-subject TractSeg white matter bundle segmentations from 105 HCP Young Adult subjects (Wasserthal et al. 2018, CC BY-NC 4.0 -- non-commercial use only). Both datasets originate from the Human Connectome Project and are subject to the applicable HCP data-use terms. Source TRK files have been converted to R fiber::bundle objects (.rds); no spatial modifications were made to the streamline data.">
+<meta name="description" content="Provides easy access to reference white matter tractography atlases for benchmarking and anomaly detection studies of brain microstructure. Two datasets are available: (1) the HCP1065 population-averaged tractography atlas with 87 white matter bundles derived from 1,065 Human Connectome Project (HCP) Young Adult subjects (Yeh 2022, distributed under CC BY-SA 4.0); and (2) per-subject TractSeg white matter bundle segmentations of 72 tracts in 105 HCP Young Adult subjects (Wasserthal et al. 2018, distributed under CC BY-NC 4.0 -- non-commercial use only). Both datasets originate from the HCP and are subject to the applicable HCP data-use terms. The data are hosted as releases in the packages GitHub repository and are downloaded on demand as R fiber' bundle objects; no data files are bundled with the package itself. The package code is distributed under the MIT license; the underlying atlas data remain under their respective Creative Commons licenses.">
+<meta property="og:description" content="Provides easy access to reference white matter tractography atlases for benchmarking and anomaly detection studies of brain microstructure. Two datasets are available: (1) the HCP1065 population-averaged tractography atlas with 87 white matter bundles derived from 1,065 Human Connectome Project (HCP) Young Adult subjects (Yeh 2022, distributed under CC BY-SA 4.0); and (2) per-subject TractSeg white matter bundle segmentations of 72 tracts in 105 HCP Young Adult subjects (Wasserthal et al. 2018, distributed under CC BY-NC 4.0 -- non-commercial use only). Both datasets originate from the HCP and are subject to the applicable HCP data-use terms. The data are hosted as releases in the packages GitHub repository and are downloaded on demand as R fiber' bundle objects; no data files are bundled with the package itself. The package code is distributed under the MIT license; the underlying atlas data remain under their respective Creative Commons licenses.">
 <meta property="og:image" content="https://tractoverse.github.io/toad/logo.png">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 </head>
@@ -28,7 +28,7 @@
 
     <a class="navbar-brand me-2" href="index.html">toad</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -37,7 +37,16 @@
 
     <div id="navbar" class="collapse navbar-collapse ms-3">
       <ul class="navbar-nav me-auto">
+<li class="nav-item"><a class="nav-link" href="articles/toad.html">Get started</a></li>
 <li class="nav-item"><a class="nav-link" href="reference/index.html">Reference</a></li>
+<li class="nav-item dropdown">
+  <button class="nav-link dropdown-toggle" type="button" id="dropdown-articles" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Articles</button>
+  <ul class="dropdown-menu" aria-labelledby="dropdown-articles">
+<li><hr class="dropdown-divider"></li>
+    <li><h6 class="dropdown-header" data-toc-skip>Vignettes</h6></li>
+    <li><a class="dropdown-item" href="articles/toad-api.html">The toad package API</a></li>
+  </ul>
+</li>
 <li class="nav-item"><a class="nav-link" href="news/index.html">Changelog</a></li>
       </ul>
 <ul class="navbar-nav">
@@ -60,7 +69,8 @@
 </div>
 <!-- badges: start -->
 
-<p>The goal of <a href="https://tractoverse.github.io/toad/"><strong>toad</strong></a> is to provide easy access to recent macroscale structural connectomes of the Human brain obtained from diffusion MRI data through diffusion modeling and subsequent so-called tractography.</p>
+<p><a href="https://tractoverse.github.io/toad/"><strong>toad</strong></a> (Tractography Open Atlas Data) provides easy access to reference white matter tractography atlases of the human brain, for benchmarking and anomaly-detection studies of brain microstructure. It is the data layer of the <a href="https://github.com/tractoverse/tractoverse" class="external-link">{tractoverse}</a> package family: imported bundles are returned as the <code>streamline</code>, <code>bundle</code>, and <code>bundle_set</code> S7 classes of the <a href="https://tractoverse.github.io/fiber/" class="external-link">{fiber}</a> package.</p>
+<p>Data are hosted as GitHub releases in the package repository and downloaded on demand — no bulky data files are bundled with the package itself.</p>
 <div class="section level2">
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
 </h2>
@@ -72,66 +82,87 @@
 <div class="section level2">
 <h2 id="datasets">Datasets<a class="anchor" aria-label="anchor" href="#datasets"></a>
 </h2>
-<p><strong>toad</strong> provides access to two large white matter tractography datasets, both stored as <a href="https://tractoverse.github.io/fiber/" class="external-link"><code>fiber::bundle</code></a> objects and fetched on demand — no bulky data files are bundled with the package itself.</p>
+<p>Two datasets are available (<code><a href="reference/available_datasets.html">available_datasets()</a></code>):</p>
+<table class="table">
+<colgroup>
+<col width="33%">
+<col width="33%">
+<col width="33%">
+</colgroup>
+<thead><tr>
+<th>Dataset</th>
+<th>Bundles</th>
+<th>License</th>
+</tr></thead>
+<tbody>
+<tr>
+<td><code>HCP1065</code></td>
+<td>87 population-averaged white matter bundles</td>
+<td><a href="https://creativecommons.org/licenses/by-sa/4.0/" class="external-link">CC BY-SA 4.0</a></td>
+</tr>
+<tr>
+<td><code>TractSeg</code></td>
+<td>72 tracts segmented in each of 105 HCP subjects</td>
+<td>
+<a href="https://creativecommons.org/licenses/by-nc/4.0/" class="external-link">CC BY-NC 4.0</a> — non-commercial</td>
+</tr>
+</tbody>
+</table>
+<p>Both datasets originate from the Human Connectome Project Young Adult dataset; users must comply with the <a href="https://www.humanconnectome.org/study/hcp-young-adult/document/wu-minn-hcp-consortium-open-access-data-use-terms" class="external-link">HCP data-use terms</a>.</p>
 <div class="section level3">
 <h3 id="hcp1065-population-averaged-atlas">HCP1065 population-averaged atlas<a class="anchor" aria-label="anchor" href="#hcp1065-population-averaged-atlas"></a>
 </h3>
-<p>A whole-brain tractography atlas averaged across 1,065 healthy adults from the <a href="https://www.humanconnectome.org/study/hcp-young-adult" class="external-link">Human Connectome Project</a>. It contains 87 white matter bundles, each represented as a single population-level streamline set.</p>
+<p>A whole-brain tractography atlas averaged across 1,065 healthy adults, containing 87 white matter bundles each represented as a single population-level streamline set. Please cite the original work when using it:</p>
+<blockquote>
+<p>Yeh FC. Population-based tract-to-region connectome of the human brain and its hierarchical topology. <em>Nat Commun</em> <strong>13</strong>, 4933 (2022). <a href="https://doi.org/10.1038/s41467-022-32595-4" class="external-link uri">https://doi.org/10.1038/s41467-022-32595-4</a></p>
+</blockquote>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># List all available bundles</span></span>
 <span><span class="fu"><a href="reference/available_bundles.html">available_bundles</a></span><span class="op">(</span><span class="st">"HCP1065"</span><span class="op">)</span></span>
 <span></span>
-<span><span class="co"># Load one bundle directly by name</span></span>
-<span><span class="va">cst_left</span> <span class="op">&lt;-</span> <span class="fu">toad</span><span class="fu">::</span><span class="fu"><a href="reference/import_bundle.html">import_bundle</a></span><span class="op">(</span>dataset <span class="op">=</span> <span class="st">"HCP1065"</span>, bundle <span class="op">=</span> <span class="st">"CST_left"</span><span class="op">)</span></span>
-<span><span class="co"># Or use the convenience function</span></span>
-<span><span class="va">cst_left</span> <span class="op">&lt;-</span> <span class="fu">toad</span><span class="fu">::</span><span class="fu"><a href="reference/HCP1065_CST_L.html">HCP1065_CST_L</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<p><strong>License:</strong> <a href="https://creativecommons.org/licenses/by-sa/4.0/" class="external-link">CC BY-SA 4.0</a>.</p>
-<p><strong>Citation:</strong></p>
-<blockquote>
-<p>Yeh FC. Population-based tract-to-region connectome of the human brain and its hierarchical topology. <em>Nat Commun</em> <strong>13</strong>, 4933 (2022). <a href="https://doi.org/10.1038/s41467-022-32595-4" class="external-link uri">https://doi.org/10.1038/s41467-022-32595-4</a></p>
-</blockquote>
-<p>Users must also comply with the <a href="https://www.humanconnectome.org/study/hcp-young-adult/document/wu-minn-hcp-consortium-open-access-data-use-terms" class="external-link">HCP data-use terms</a>.</p>
+<span><span class="co"># Load one bundle by name</span></span>
+<span><span class="va">cst_left</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/import_bundle.html">import_bundle</a></span><span class="op">(</span><span class="st">"HCP1065"</span>, <span class="st">"Left Corticospinal Tract"</span><span class="op">)</span></span>
+<span><span class="co"># Or use the convenience accessor</span></span>
+<span><span class="va">cst_left</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/HCP1065_CST_L.html">HCP1065_CST_L</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="tractseg-per-subject-bundles">TractSeg per-subject bundles<a class="anchor" aria-label="anchor" href="#tractseg-per-subject-bundles"></a>
 </h3>
-<p>72 white matter tracts segmented in each of 105 HCP Young Adult subjects using <a href="https://github.com/MIC-DKFZ/TractSeg" class="external-link">TractSeg</a>, redistributed from the <a href="https://zenodo.org/records/1477956" class="external-link">Zenodo archive</a> (DOI: <a href="https://doi.org/10.5281/zenodo.1477956" class="external-link">10.5281/zenodo.1477956</a>). Each bundle is downloaded on first use and cached locally.</p>
+<p>72 white matter tracts segmented in each of 105 HCP Young Adult subjects using <a href="https://github.com/MIC-DKFZ/TractSeg" class="external-link">TractSeg</a>, redistributed from the <a href="https://zenodo.org/records/1477956" class="external-link">Zenodo archive</a> (DOI: <a href="https://doi.org/10.5281/zenodo.1477956" class="external-link">10.5281/zenodo.1477956</a>). Because the segmentation is per-subject, this dataset supports population-style analyses. Please cite the original TractSeg publication:</p>
+<blockquote>
+<p>Wasserthal J, Neher P, Maier-Hein KH. TractSeg — Fast and accurate white matter tract segmentation. <em>NeuroImage</em> <strong>183</strong>, 239–253 (2018). <a href="https://doi.org/10.1016/j.neuroimage.2018.07.070" class="external-link uri">https://doi.org/10.1016/j.neuroimage.2018.07.070</a></p>
+</blockquote>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># List all available TractSeg bundles</span></span>
 <span><span class="fu"><a href="reference/available_bundles.html">available_bundles</a></span><span class="op">(</span><span class="st">"TractSeg"</span><span class="op">)</span></span>
 <span></span>
-<span><span class="co"># Import one bundle (downloads on first call, cached afterwards)</span></span>
-<span><span class="va">cst_left</span> <span class="op">&lt;-</span> <span class="fu">toad</span><span class="fu">::</span><span class="fu"><a href="reference/import_bundle.html">import_bundle</a></span><span class="op">(</span>dataset <span class="op">=</span> <span class="st">"TractSeg"</span>, bundle <span class="op">=</span> <span class="st">"CST_left"</span>, subjects <span class="op">=</span> <span class="fl">1L</span><span class="op">)</span></span>
-<span><span class="co"># Or use the convenience function</span></span>
-<span><span class="va">cst_left</span> <span class="op">&lt;-</span> <span class="fu">toad</span><span class="fu">::</span><span class="fu"><a href="reference/TractSeg_CST_left.html">TractSeg_CST_left</a></span><span class="op">(</span>subjects <span class="op">=</span> <span class="fl">1L</span><span class="op">)</span></span></code></pre></div>
-<p><strong>License:</strong> <a href="https://creativecommons.org/licenses/by-nc/4.0/" class="external-link">CC BY-NC 4.0</a> — <strong>non-commercial use only.</strong></p>
-<p><strong>Citation:</strong></p>
-<blockquote>
-<p>Wasserthal J, Neher P, Maier-Hein KH. TractSeg — Fast and accurate white matter tract segmentation. <em>NeuroImage</em> <strong>183</strong>, 239–253 (2018). <a href="https://doi.org/10.1016/j.neuroimage.2018.07.070" class="external-link uri">https://doi.org/10.1016/j.neuroimage.2018.07.070</a></p>
-</blockquote>
-<p>Users must also comply with the <a href="https://www.humanconnectome.org/study/hcp-young-adult/document/wu-minn-hcp-consortium-open-access-data-use-terms" class="external-link">HCP data-use terms</a>.</p>
+<span><span class="co"># A single subject — returns a bundle</span></span>
+<span><span class="va">af_left</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/import_bundle.html">import_bundle</a></span><span class="op">(</span><span class="st">"TractSeg"</span>, <span class="st">"Left Arcuate Fasciculus"</span>, subjects <span class="op">=</span> <span class="st">"599469"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># A random sample of 10 subjects — returns a bundle_set</span></span>
+<span><span class="va">af_sample</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/import_bundle.html">import_bundle</a></span><span class="op">(</span><span class="st">"TractSeg"</span>, <span class="st">"Left Arcuate Fasciculus"</span>, subjects <span class="op">=</span> <span class="fl">10L</span><span class="op">)</span></span></code></pre></div>
 </div>
-<div class="section level3">
-<h3 id="bundle-objects">Bundle objects<a class="anchor" aria-label="anchor" href="#bundle-objects"></a>
-</h3>
-<p>All bundles are returned as <code><a href="https://tractoverse.github.io/fiber/reference/bundle.html" class="external-link">fiber::bundle</a></code> objects with two slots:</p>
+</div>
+<div class="section level2">
+<h2 id="bundle-objects">Bundle objects<a class="anchor" aria-label="anchor" href="#bundle-objects"></a>
+</h2>
+<p>All bundles are returned as <code><a href="https://tractoverse.github.io/fiber/reference/bundle.html" class="external-link">fiber::bundle</a></code> objects:</p>
 <ul>
 <li>
-<p><code>@streamlines</code> — a list of <code>streamline</code> objects, each carrying:</p>
+<code>@streamlines</code> — a list of <code>streamline</code> objects, each carrying:
 <ul>
 <li>
-<code>@points</code> - a <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>P</mi><mo>×</mo><mn>3</mn></mrow><annotation encoding="application/x-tex">P \times 3</annotation></semantics></math> matrix of 3D coordinates for the <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>P</mi><annotation encoding="application/x-tex">P</annotation></semantics></math> points along the streamline.</li>
+<code>@points</code> — a <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>P</mi><mo>×</mo><mn>3</mn></mrow><annotation encoding="application/x-tex">P \times 3</annotation></semantics></math> matrix of 3D coordinates for the <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>P</mi><annotation encoding="application/x-tex">P</annotation></semantics></math> points along the streamline;</li>
 <li>
-<code>@point_data</code> - a list of numeric-only vectors of length <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>P</mi><annotation encoding="application/x-tex">P</annotation></semantics></math> containing point-level data (e.g., FA, MD, etc.) for each point along the streamline.</li>
+<code>@point_data</code> — a list of per-point attributes (e.g. FA, MD);</li>
 <li>
-<code>@streamline_data</code> - a list of scalars (of any type) containing streamline data that are not common across all streamlines in the bundle.</li>
+<code>@streamline_data</code> — a list of per-streamline scalars.</li>
 </ul>
 </li>
-<li><p><code>@streamline_data</code> - a list of vectors containing streamline-level data that are common across all streamlines in the bundle.</p></li>
-<li><p><code>@bundle_data</code> — a list of scalars (of any type) containing metadata about the bundle (name, source dataset, etc.).</p></li>
+<li>
+<code>@bundle_data</code> — bundle-level metadata (name, source dataset, etc.).</li>
 </ul>
-<p>See the <a href="https://tractoverse.github.io/fiber/" class="external-link">fiber package documentation</a> for full details on working with these objects.</p>
-</div>
+<p>Multi-subject imports return a <code><a href="https://tractoverse.github.io/fiber/reference/bundle_set.html" class="external-link">fiber::bundle_set</a></code>. See the <a href="https://tractoverse.github.io/toad/articles/toad.html">getting started</a> vignette for details, and the <a href="https://tractoverse.github.io/fiber/" class="external-link">{fiber}</a> package for working with these objects.</p>
 </div>
 </div>
   </main><aside class="col-md-3"><div class="links">
@@ -146,7 +177,7 @@
 <h2 data-toc-skip>License</h2>
 <ul class="list-unstyled">
 <li><a href="LICENSE.html">Full license</a></li>
-<li><small><a href="https://creativecommons.org/licenses/by-sa/4.0" class="external-link">CC BY-SA 4.0</a></small></li>
+<li><small><a href="https://opensource.org/licenses/mit-license.php" class="external-link">MIT</a> + file <a href="LICENSE-text.html">LICENSE</a></small></li>
 </ul>
 </div>
 
@@ -161,7 +192,7 @@
 <div class="developers">
 <h2 data-toc-skip>Developers</h2>
 <ul class="list-unstyled">
-<li>Aymeric Stamm <br><small class="roles"> Author, maintainer </small> <a href="https://orcid.org/0000-0002-8725-3654" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a>  </li>
+<li>Aymeric Stamm <br><small class="roles"> Author, maintainer, copyright holder </small> <a href="https://orcid.org/0000-0002-8725-3654" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a>  </li>
 <li><a href="authors.html">More about authors...</a></li>
 </ul>
 </div>
