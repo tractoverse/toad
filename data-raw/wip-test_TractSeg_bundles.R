@@ -34,7 +34,8 @@ for (fn_name in bundle_fns) {
     info = paste(fn_name, "returns list of subjects (default subjects=NULL)")
   )
   expect_equal(
-    result[[1L]], fake_bundle,
+    result[[1L]],
+    fake_bundle,
     info = paste(fn_name, "first element is the mocked bundle")
   )
 }

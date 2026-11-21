@@ -1,14 +1,14 @@
 #' Import a bundle hosted in GitHub releases
-#' 
+#'
 #' This function allows you to import a bundle from one of the available datasets by specifying
 #' the dataset and the bundle name. Available datasets can be queried using [`available_datasets()`].
 #' Available bundles for a given dataset can be queried using [`available_bundles()`], which
 #' will return the list of bundles in the specified dataset. For multi-subject datasets (e.g.
 #' `"TractSeg"`), the `subjects` argument controls which subjects are loaded. For single-atlas
 #' datasets (e.g. `"HCP1065"`), `subjects` is ignored.
-#' 
+#'
 #' @inheritSection HCP1065 HCP1065
-#' 
+#'
 #' @param dataset A string specifying the dataset to import the bundle from. Currently
 #'   `"HCP1065"` and `"TractSeg"` are supported.
 #' @param bundle A string specifying the bundle to import. Must be one of the names returned by
@@ -25,32 +25,34 @@
 #'     \item{A character scalar}{The bundle for that single subject ID is returned directly as a
 #'       [fiber::bundle] object.}
 #'   }
-#' 
+#'
 #' @returns For `"HCP1065"`, or for `"TractSeg"` with a scalar character `subjects` value: an
 #'   object of class [fiber::bundle]. For `"TractSeg"` with `subjects = NULL`, an integer, or a
 #'   character vector of length > 1: a [fiber::bundle_set] with one bundle per subject.
-#' 
+#'
 #' @export
 #' @examples
 #' bdl <- import_bundle("HCP1065", "Left Cranial Nerve VII")
-#' 
+#'
 #' \dontrun{
 #' # Single subject
 #' bdl <- import_bundle("TractSeg", "Left Arcuate Fasciculus", subjects = "599469")
-#' 
+#'
 #' # Random sample of 10 subjects — returns a bundle_set
 #' bdls <- import_bundle("TractSeg", "Left Arcuate Fasciculus", subjects = 10L)
-#' 
+#'
 #' # Specific subjects by ID — returns a bundle_set
 #' bdls <- import_bundle("TractSeg", "Left Arcuate Fasciculus", subjects = c("599469", "613538"))
 #' }
 import_bundle <- function(dataset, bundle, subjects = NULL) {
   if (!dataset %in% available_datasets()) {
-    .toad_abort("Dataset not supported. Currently available datasets are {available_datasets()}.")
+    .toad_abort(
+      "Dataset not supported. Currently available datasets are {available_datasets()}."
+    )
   }
 
   if (!bundle %in% available_bundles(dataset)) {
-    cli::cli_abort(c(
+    .toad_abort(c(
       "The {dataset} dataset does not contain the bundle {.val {bundle}}.",
       "i" = "Available bundles:",
       "*" = available_bundles(dataset)
@@ -62,7 +64,11 @@ import_bundle <- function(dataset, bundle, subjects = NULL) {
     tf <- tempfile(fileext = ".rds")
     on.exit(unlink(tf), add = TRUE)
     .toad_download_file(
-      url = paste0("https://github.com/tractoverse/toad/releases/download/hcp1065/HCP1065_", short_bundle, ".rds"),
+      url = paste0(
+        "https://github.com/tractoverse/toad/releases/download/hcp1065/HCP1065_",
+        short_bundle,
+        ".rds"
+      ),
       destfile = tf
     )
     return(readRDS(tf))
@@ -87,13 +93,15 @@ import_bundle <- function(dataset, bundle, subjects = NULL) {
   } else if (is.numeric(subjects)) {
     n <- as.integer(subjects)
     if (n < 1L || n > length(subject_names)) {
-      .toad_abort("`subjects` must be between 1 and {length(subject_names)} (total available subjects).")
+      .toad_abort(
+        "`subjects` must be between 1 and {length(subject_names)} (total available subjects)."
+      )
     }
     subject_names <- sample(subject_names, n)
   } else if (is.character(subjects)) {
     bad <- subjects[!subjects %in% subject_names]
     if (length(bad) > 0L) {
-      cli::cli_abort(c(
+      .toad_abort(c(
         "{length(bad)} subject ID{?s} not found in the TractSeg dataset: {.val {bad}}.",
         "i" = "Available subjects:",
         "*" = subject_names
@@ -101,11 +109,21 @@ import_bundle <- function(dataset, bundle, subjects = NULL) {
     }
     subject_names <- subjects
   } else {
-    .toad_abort("`subjects` must be NULL, an integer count, or a subject ID string.")
+    .toad_abort(
+      "`subjects` must be NULL, an integer count, or a subject ID string."
+    )
   }
 
   out <- lapply(subject_names, function(subject) {
-    url <- paste0("https://github.com/tractoverse/toad/releases/download/tractseg-", bundle_stem, "/TractSeg_", subject, "_", bundle_stem, ".rds")
+    url <- paste0(
+      "https://github.com/tractoverse/toad/releases/download/tractseg-",
+      bundle_stem,
+      "/TractSeg_",
+      subject,
+      "_",
+      bundle_stem,
+      ".rds"
+    )
     tf <- tempfile(fileext = ".rds")
     on.exit(unlink(tf), add = TRUE)
     .toad_download_file(url, tf)
@@ -117,6 +135,5 @@ import_bundle <- function(dataset, bundle, subjects = NULL) {
   }
 
   names(out) <- subject_names
-  print(out[[1]])
   fiber::bundle_set(bundles = out)
 }

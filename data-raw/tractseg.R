@@ -16,12 +16,16 @@
 # ------
 #   One TractSeg_<subject>_<bundle>.rds per subject, written to TRACTSEG_OUT_DIR.
 
-bundle  <- Sys.getenv("TRACTSEG_BUNDLE")
+bundle <- Sys.getenv("TRACTSEG_BUNDLE")
 trk_dir <- Sys.getenv("TRACTSEG_TRK_DIR")
 out_dir <- Sys.getenv("TRACTSEG_OUT_DIR", unset = tempdir())
 
-if (bundle  == "") stop("Environment variable TRACTSEG_BUNDLE is not set.")
-if (trk_dir == "") stop("Environment variable TRACTSEG_TRK_DIR is not set.")
+if (bundle == "") {
+  stop("Environment variable TRACTSEG_BUNDLE is not set.")
+}
+if (trk_dir == "") {
+  stop("Environment variable TRACTSEG_TRK_DIR is not set.")
+}
 
 fs::dir_create(out_dir)
 
@@ -41,14 +45,18 @@ convert_one <- function(i) {
   f <- trk_files[[i]]
   # fetch_bundle.py names files  <subject_id>_<bundle>.trk
   subject_id <- sub(paste0("_", bundle, "\\.trk$"), "", basename(f))
-  rds_name   <- paste0("TractSeg_", subject_id, "_", bundle, ".rds")
-  rds_path   <- file.path(out_dir, rds_name)
+  rds_name <- paste0("TractSeg_", subject_id, "_", bundle, ".rds")
+  rds_path <- file.path(out_dir, rds_name)
 
   # A TRK file whose size equals exactly the 1000-byte header has zero
   # streamlines; riot::read_trk would crash with "subscript out of bounds".
   if (file.size(f) <= 1000L) {
-    message(sprintf("[%d/%d] %s: empty TRK (no streamlines), skipping.",
-                    i, length(trk_files), subject_id))
+    message(sprintf(
+      "[%d/%d] %s: empty TRK (no streamlines), skipping.",
+      i,
+      length(trk_files),
+      subject_id
+    ))
     return(NA_character_)
   }
 
@@ -62,13 +70,17 @@ results <- parallel::mclapply(
   seq_along(trk_files),
   convert_one,
   mc.cores = n_cores,
-  mc.preschedule = FALSE   # let each worker pick up the next job as soon as it is free
+  mc.preschedule = FALSE # let each worker pick up the next job as soon as it is free
 )
 
 # mclapply with mc.preschedule = FALSE returns failed workers as
 # class c("try-error", "character"), NOT c("error", "condition"), so we
 # must check for both classes.
-failed <- vapply(results, function(x) inherits(x, c("error", "try-error")), logical(1L))
+failed <- vapply(
+  results,
+  function(x) inherits(x, c("error", "try-error")),
+  logical(1L)
+)
 if (any(failed)) {
   for (idx in which(failed)) {
     msg <- if (inherits(results[[idx]], "error")) {
@@ -87,7 +99,11 @@ rds_paths <- Filter(
   function(x) is.character(x) && length(x) == 1L && !is.na(x) && file.exists(x),
   results
 )
-n_skipped  <- sum(vapply(results, function(x) identical(x, NA_character_), logical(1L)))
+n_skipped <- sum(vapply(
+  results,
+  function(x) identical(x, NA_character_),
+  logical(1L)
+))
 
 cli::cli_alert_success(
   "Bundle {.val {bundle}}: {length(rds_paths)} RDS file(s) written to {.path {out_dir}}{if (n_skipped > 0) paste0(' (', n_skipped, ' empty TRK skipped)') else ''}"

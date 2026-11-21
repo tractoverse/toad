@@ -29,7 +29,7 @@ where it was extracted from, etc.
 }
 
 More details about the format of the data can be found in the documentation
-of the \href{https://tractoverse.github.io/fiber/}{fiber} package.
+of the \href{https://tractoverse.github.io/fiber/}{{fiber}} package.
 }
 \section{HCP1065}{
 

@@ -55,17 +55,23 @@ assignInNamespace(
 )
 
 # subjects = NULL  →  named list of all subjects
-res_null <- import_bundle("TractSeg", "Left Arcuate Fasciculus", subjects = NULL)
+res_null <- import_bundle(
+  "TractSeg",
+  "Left Arcuate Fasciculus",
+  subjects = NULL
+)
 expect_true(
   is.list(res_null) && length(res_null) == 3L,
   info = "TractSeg subjects=NULL returns list of all subjects"
 )
 expect_equal(
-  names(res_null), fake_subjects,
+  names(res_null),
+  fake_subjects,
   info = "TractSeg subjects=NULL names match subject IDs"
 )
 expect_equal(
-  res_null[[1L]], fake_ts_bundle,
+  res_null[[1L]],
+  fake_ts_bundle,
   info = "TractSeg subjects=NULL each element is the bundle object"
 )
 
@@ -82,9 +88,14 @@ expect_true(
 )
 
 # subjects = character (single subject)  →  bundle object directly
-res_chr <- import_bundle("TractSeg", "Left Arcuate Fasciculus", subjects = "100307")
+res_chr <- import_bundle(
+  "TractSeg",
+  "Left Arcuate Fasciculus",
+  subjects = "100307"
+)
 expect_equal(
-  res_chr, fake_ts_bundle,
+  res_chr,
+  fake_ts_bundle,
   info = "TractSeg subjects='100307' returns bundle directly (not wrapped in list)"
 )
 

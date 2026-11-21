@@ -162,7 +162,3 @@ export(TractSeg_UF_right)
 export(available_bundles)
 export(available_datasets)
 export(import_bundle)
-importFrom(fiber,
-  bundle,
-  streamline
-)

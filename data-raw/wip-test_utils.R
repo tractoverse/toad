@@ -18,7 +18,8 @@ expect_true(
   info = "available_bundles returns a character vector"
 )
 expect_equal(
-  length(bundles), 87L,
+  length(bundles),
+  87L,
   info = "HCP1065 has 87 bundles"
 )
 expect_true(
@@ -43,7 +44,8 @@ expect_true(
   info = "available_bundles('TractSeg') returns a character vector"
 )
 expect_equal(
-  length(ts_bundles), 72L,
+  length(ts_bundles),
+  72L,
   info = "TractSeg has 72 bundles"
 )
 expect_true(
@@ -78,7 +80,8 @@ assignInNamespace(".tractseg_subject_list", orig_tsl, ns = "toad")
 # Real call to a non-existent release should return character(0) (not error)
 result_missing <- toad:::.tractseg_subject_list("BUNDLE_DOES_NOT_EXIST_XYZ")
 expect_equal(
-  result_missing, character(0L),
+  result_missing,
+  character(0L),
   info = ".tractseg_subject_list returns character(0) when release does not exist"
 )
 
@@ -165,4 +168,3 @@ expect_equal(
   info = ".toad_download_file downloads and the rds round-trips correctly"
 )
 unlink(c(src_file, dst_file))
-

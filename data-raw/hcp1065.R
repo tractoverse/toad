@@ -1,7 +1,7 @@
 zipfile <- "data-raw/hcp1065_avg_tracts_trk.zip"
 utils::download.file(
   url = "https://github.com/data-others/atlas/releases/download/hcp1065/hcp1065_avg_tracts_trk.zip",
-  destfile = zipfile, 
+  destfile = zipfile,
   mode = "wb"
 )
 utils::unzip(zipfile, exdir = "data-raw/HCP1065")
@@ -9,7 +9,12 @@ utils::unzip(zipfile, exdir = "data-raw/HCP1065")
 out_dir <- Sys.getenv("HCP1065_OUT_DIR", unset = "inst/extdata")
 fs::dir_create(out_dir)
 
-for (f in list.files("data-raw/HCP1065", recursive = TRUE, full.names = TRUE, include.dirs = FALSE)) {
+for (f in list.files(
+  "data-raw/HCP1065",
+  recursive = TRUE,
+  full.names = TRUE,
+  include.dirs = FALSE
+)) {
   # Setup bundle name
   l <- strsplit(f, "/")[[1]]
   bundle_name <- l[[length(l)]]
@@ -25,8 +30,18 @@ for (f in list.files("data-raw/HCP1065", recursive = TRUE, full.names = TRUE, in
 
   # Save the data
   assign(bundle_name, bdl)
-  do.call("saveRDS", list(as.name(bundle_name), file.path(out_dir, paste0(bundle_name, ".rds")), compress = "xz", version = 3))
-  cli::cli_alert_success("-------------- Finished processing {bundle_name} tract! --------------")
+  do.call(
+    "saveRDS",
+    list(
+      as.name(bundle_name),
+      file.path(out_dir, paste0(bundle_name, ".rds")),
+      compress = "xz",
+      version = 3
+    )
+  )
+  cli::cli_alert_success(
+    "-------------- Finished processing {bundle_name} tract! --------------"
+  )
 }
 
 fs::dir_delete("data-raw/HCP1065")

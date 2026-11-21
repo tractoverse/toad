@@ -29,7 +29,7 @@
 #'
 #' Wasserthal, J., Neher, P., & Maier-Hein, K. H. (2018). TractSeg -- Fast and
 #' accurate white matter tract segmentation. *NeuroImage*, 183, 239–253.
-#' \doi{doi:10.1016/j.neuroimage.2018.07.070}
+#' \doi{10.1016/j.neuroimage.2018.07.070}
 #'
 #' Raw data archived at Zenodo: <https://zenodo.org/records/1477956>
 #' (DOI: 10.5281/zenodo.1477956).
@@ -82,7 +82,11 @@ TractSeg_AF_right <- function(subjects = NULL) {
 #' @inheritParams import_bundle
 #' @export
 TractSeg_ATR_left <- function(subjects = NULL) {
-  import_bundle("TractSeg", "Left Anterior Thalamic Radiation", subjects = subjects)
+  import_bundle(
+    "TractSeg",
+    "Left Anterior Thalamic Radiation",
+    subjects = subjects
+  )
 }
 
 #' TractSeg Right Anterior Thalamic Radiation
@@ -90,7 +94,11 @@ TractSeg_ATR_left <- function(subjects = NULL) {
 #' @inheritParams import_bundle
 #' @export
 TractSeg_ATR_right <- function(subjects = NULL) {
-  import_bundle("TractSeg", "Right Anterior Thalamic Radiation", subjects = subjects)
+  import_bundle(
+    "TractSeg",
+    "Right Anterior Thalamic Radiation",
+    subjects = subjects
+  )
 }
 
 #' TractSeg Commissure Anterior
@@ -138,7 +146,11 @@ TractSeg_CC_3 <- function(subjects = NULL) {
 #' @inheritParams import_bundle
 #' @export
 TractSeg_CC_4 <- function(subjects = NULL) {
-  import_bundle("TractSeg", "Corpus Callosum Anterior Midbody", subjects = subjects)
+  import_bundle(
+    "TractSeg",
+    "Corpus Callosum Anterior Midbody",
+    subjects = subjects
+  )
 }
 
 #' TractSeg Corpus Callosum Posterior Midbody
@@ -146,7 +158,11 @@ TractSeg_CC_4 <- function(subjects = NULL) {
 #' @inheritParams import_bundle
 #' @export
 TractSeg_CC_5 <- function(subjects = NULL) {
-  import_bundle("TractSeg", "Corpus Callosum Posterior Midbody", subjects = subjects)
+  import_bundle(
+    "TractSeg",
+    "Corpus Callosum Posterior Midbody",
+    subjects = subjects
+  )
 }
 
 #' TractSeg Corpus Callosum Isthmus
@@ -234,7 +250,11 @@ TractSeg_FX_right <- function(subjects = NULL) {
 #' @inheritParams import_bundle
 #' @export
 TractSeg_ICP_left <- function(subjects = NULL) {
-  import_bundle("TractSeg", "Left Inferior Cerebellar Peduncle", subjects = subjects)
+  import_bundle(
+    "TractSeg",
+    "Left Inferior Cerebellar Peduncle",
+    subjects = subjects
+  )
 }
 
 #' TractSeg Right Inferior Cerebellar Peduncle
@@ -242,7 +262,11 @@ TractSeg_ICP_left <- function(subjects = NULL) {
 #' @inheritParams import_bundle
 #' @export
 TractSeg_ICP_right <- function(subjects = NULL) {
-  import_bundle("TractSeg", "Right Inferior Cerebellar Peduncle", subjects = subjects)
+  import_bundle(
+    "TractSeg",
+    "Right Inferior Cerebellar Peduncle",
+    subjects = subjects
+  )
 }
 
 #' TractSeg Left Inferior Fronto-Occipital Fasciculus
@@ -250,7 +274,11 @@ TractSeg_ICP_right <- function(subjects = NULL) {
 #' @inheritParams import_bundle
 #' @export
 TractSeg_IFO_left <- function(subjects = NULL) {
-  import_bundle("TractSeg", "Left Inferior Fronto-Occipital Fasciculus", subjects = subjects)
+  import_bundle(
+    "TractSeg",
+    "Left Inferior Fronto-Occipital Fasciculus",
+    subjects = subjects
+  )
 }
 
 #' TractSeg Right Inferior Fronto-Occipital Fasciculus
@@ -258,7 +286,11 @@ TractSeg_IFO_left <- function(subjects = NULL) {
 #' @inheritParams import_bundle
 #' @export
 TractSeg_IFO_right <- function(subjects = NULL) {
-  import_bundle("TractSeg", "Right Inferior Fronto-Occipital Fasciculus", subjects = subjects)
+  import_bundle(
+    "TractSeg",
+    "Right Inferior Fronto-Occipital Fasciculus",
+    subjects = subjects
+  )
 }
 
 #' TractSeg Left Inferior Longitudinal Fasciculus
@@ -266,7 +298,11 @@ TractSeg_IFO_right <- function(subjects = NULL) {
 #' @inheritParams import_bundle
 #' @export
 TractSeg_ILF_left <- function(subjects = NULL) {
-  import_bundle("TractSeg", "Left Inferior Longitudinal Fasciculus", subjects = subjects)
+  import_bundle(
+    "TractSeg",
+    "Left Inferior Longitudinal Fasciculus",
+    subjects = subjects
+  )
 }
 
 #' TractSeg Right Inferior Longitudinal Fasciculus
@@ -274,7 +310,11 @@ TractSeg_ILF_left <- function(subjects = NULL) {
 #' @inheritParams import_bundle
 #' @export
 TractSeg_ILF_right <- function(subjects = NULL) {
-  import_bundle("TractSeg", "Right Inferior Longitudinal Fasciculus", subjects = subjects)
+  import_bundle(
+    "TractSeg",
+    "Right Inferior Longitudinal Fasciculus",
+    subjects = subjects
+  )
 }
 
 #' TractSeg Middle Cerebellar Peduncle
@@ -290,7 +330,11 @@ TractSeg_MCP <- function(subjects = NULL) {
 #' @inheritParams import_bundle
 #' @export
 TractSeg_MLF_left <- function(subjects = NULL) {
-  import_bundle("TractSeg", "Left Middle Longitudinal Fasciculus", subjects = subjects)
+  import_bundle(
+    "TractSeg",
+    "Left Middle Longitudinal Fasciculus",
+    subjects = subjects
+  )
 }
 
 #' TractSeg Right Middle Longitudinal Fasciculus
@@ -298,7 +342,11 @@ TractSeg_MLF_left <- function(subjects = NULL) {
 #' @inheritParams import_bundle
 #' @export
 TractSeg_MLF_right <- function(subjects = NULL) {
-  import_bundle("TractSeg", "Right Middle Longitudinal Fasciculus", subjects = subjects)
+  import_bundle(
+    "TractSeg",
+    "Right Middle Longitudinal Fasciculus",
+    subjects = subjects
+  )
 }
 
 #' TractSeg Left Optic Radiation
@@ -322,7 +370,11 @@ TractSeg_OR_right <- function(subjects = NULL) {
 #' @inheritParams import_bundle
 #' @export
 TractSeg_POPT_left <- function(subjects = NULL) {
-  import_bundle("TractSeg", "Left Parieto-Occipital Pontine Tract", subjects = subjects)
+  import_bundle(
+    "TractSeg",
+    "Left Parieto-Occipital Pontine Tract",
+    subjects = subjects
+  )
 }
 
 #' TractSeg Right Parieto-Occipital Pontine Tract
@@ -330,7 +382,11 @@ TractSeg_POPT_left <- function(subjects = NULL) {
 #' @inheritParams import_bundle
 #' @export
 TractSeg_POPT_right <- function(subjects = NULL) {
-  import_bundle("TractSeg", "Right Parieto-Occipital Pontine Tract", subjects = subjects)
+  import_bundle(
+    "TractSeg",
+    "Right Parieto-Occipital Pontine Tract",
+    subjects = subjects
+  )
 }
 
 #' TractSeg Left Superior Cerebellar Peduncle
@@ -338,7 +394,11 @@ TractSeg_POPT_right <- function(subjects = NULL) {
 #' @inheritParams import_bundle
 #' @export
 TractSeg_SCP_left <- function(subjects = NULL) {
-  import_bundle("TractSeg", "Left Superior Cerebellar Peduncle", subjects = subjects)
+  import_bundle(
+    "TractSeg",
+    "Left Superior Cerebellar Peduncle",
+    subjects = subjects
+  )
 }
 
 #' TractSeg Right Superior Cerebellar Peduncle
@@ -346,7 +406,11 @@ TractSeg_SCP_left <- function(subjects = NULL) {
 #' @inheritParams import_bundle
 #' @export
 TractSeg_SCP_right <- function(subjects = NULL) {
-  import_bundle("TractSeg", "Right Superior Cerebellar Peduncle", subjects = subjects)
+  import_bundle(
+    "TractSeg",
+    "Right Superior Cerebellar Peduncle",
+    subjects = subjects
+  )
 }
 
 #' TractSeg Left Superior Longitudinal Fasciculus I
@@ -354,7 +418,11 @@ TractSeg_SCP_right <- function(subjects = NULL) {
 #' @inheritParams import_bundle
 #' @export
 TractSeg_SLF_I_left <- function(subjects = NULL) {
-  import_bundle("TractSeg", "Left Superior Longitudinal Fasciculus I", subjects = subjects)
+  import_bundle(
+    "TractSeg",
+    "Left Superior Longitudinal Fasciculus I",
+    subjects = subjects
+  )
 }
 
 #' TractSeg Right Superior Longitudinal Fasciculus I
@@ -362,7 +430,11 @@ TractSeg_SLF_I_left <- function(subjects = NULL) {
 #' @inheritParams import_bundle
 #' @export
 TractSeg_SLF_I_right <- function(subjects = NULL) {
-  import_bundle("TractSeg", "Right Superior Longitudinal Fasciculus I", subjects = subjects)
+  import_bundle(
+    "TractSeg",
+    "Right Superior Longitudinal Fasciculus I",
+    subjects = subjects
+  )
 }
 
 #' TractSeg Left Superior Longitudinal Fasciculus II
@@ -370,7 +442,11 @@ TractSeg_SLF_I_right <- function(subjects = NULL) {
 #' @inheritParams import_bundle
 #' @export
 TractSeg_SLF_II_left <- function(subjects = NULL) {
-  import_bundle("TractSeg", "Left Superior Longitudinal Fasciculus II", subjects = subjects)
+  import_bundle(
+    "TractSeg",
+    "Left Superior Longitudinal Fasciculus II",
+    subjects = subjects
+  )
 }
 
 #' TractSeg Right Superior Longitudinal Fasciculus II
@@ -378,7 +454,11 @@ TractSeg_SLF_II_left <- function(subjects = NULL) {
 #' @inheritParams import_bundle
 #' @export
 TractSeg_SLF_II_right <- function(subjects = NULL) {
-  import_bundle("TractSeg", "Right Superior Longitudinal Fasciculus II", subjects = subjects)
+  import_bundle(
+    "TractSeg",
+    "Right Superior Longitudinal Fasciculus II",
+    subjects = subjects
+  )
 }
 
 #' TractSeg Left Superior Longitudinal Fasciculus III
@@ -386,7 +466,11 @@ TractSeg_SLF_II_right <- function(subjects = NULL) {
 #' @inheritParams import_bundle
 #' @export
 TractSeg_SLF_III_left <- function(subjects = NULL) {
-  import_bundle("TractSeg", "Left Superior Longitudinal Fasciculus III", subjects = subjects)
+  import_bundle(
+    "TractSeg",
+    "Left Superior Longitudinal Fasciculus III",
+    subjects = subjects
+  )
 }
 
 #' TractSeg Right Superior Longitudinal Fasciculus III
@@ -394,7 +478,11 @@ TractSeg_SLF_III_left <- function(subjects = NULL) {
 #' @inheritParams import_bundle
 #' @export
 TractSeg_SLF_III_right <- function(subjects = NULL) {
-  import_bundle("TractSeg", "Right Superior Longitudinal Fasciculus III", subjects = subjects)
+  import_bundle(
+    "TractSeg",
+    "Right Superior Longitudinal Fasciculus III",
+    subjects = subjects
+  )
 }
 
 #' TractSeg Left Superior Thalamic Radiation
@@ -402,7 +490,11 @@ TractSeg_SLF_III_right <- function(subjects = NULL) {
 #' @inheritParams import_bundle
 #' @export
 TractSeg_STR_left <- function(subjects = NULL) {
-  import_bundle("TractSeg", "Left Superior Thalamic Radiation", subjects = subjects)
+  import_bundle(
+    "TractSeg",
+    "Left Superior Thalamic Radiation",
+    subjects = subjects
+  )
 }
 
 #' TractSeg Right Superior Thalamic Radiation
@@ -410,7 +502,11 @@ TractSeg_STR_left <- function(subjects = NULL) {
 #' @inheritParams import_bundle
 #' @export
 TractSeg_STR_right <- function(subjects = NULL) {
-  import_bundle("TractSeg", "Right Superior Thalamic Radiation", subjects = subjects)
+  import_bundle(
+    "TractSeg",
+    "Right Superior Thalamic Radiation",
+    subjects = subjects
+  )
 }
 
 #' TractSeg Left Striato-Fronto-Orbital Tract
@@ -418,7 +514,11 @@ TractSeg_STR_right <- function(subjects = NULL) {
 #' @inheritParams import_bundle
 #' @export
 TractSeg_ST_FO_left <- function(subjects = NULL) {
-  import_bundle("TractSeg", "Left Striato-Fronto-Orbital Tract", subjects = subjects)
+  import_bundle(
+    "TractSeg",
+    "Left Striato-Fronto-Orbital Tract",
+    subjects = subjects
+  )
 }
 
 #' TractSeg Right Striato-Fronto-Orbital Tract
@@ -426,7 +526,11 @@ TractSeg_ST_FO_left <- function(subjects = NULL) {
 #' @inheritParams import_bundle
 #' @export
 TractSeg_ST_FO_right <- function(subjects = NULL) {
-  import_bundle("TractSeg", "Right Striato-Fronto-Orbital Tract", subjects = subjects)
+  import_bundle(
+    "TractSeg",
+    "Right Striato-Fronto-Orbital Tract",
+    subjects = subjects
+  )
 }
 
 #' TractSeg Left Striato-Occipital Tract
@@ -442,7 +546,11 @@ TractSeg_ST_OCC_left <- function(subjects = NULL) {
 #' @inheritParams import_bundle
 #' @export
 TractSeg_ST_OCC_right <- function(subjects = NULL) {
-  import_bundle("TractSeg", "Right Striato-Occipital Tract", subjects = subjects)
+  import_bundle(
+    "TractSeg",
+    "Right Striato-Occipital Tract",
+    subjects = subjects
+  )
 }
 
 #' TractSeg Left Striato-Parietal Tract
@@ -466,7 +574,11 @@ TractSeg_ST_PAR_right <- function(subjects = NULL) {
 #' @inheritParams import_bundle
 #' @export
 TractSeg_ST_POSTC_left <- function(subjects = NULL) {
-  import_bundle("TractSeg", "Left Striato-Postcentral Tract", subjects = subjects)
+  import_bundle(
+    "TractSeg",
+    "Left Striato-Postcentral Tract",
+    subjects = subjects
+  )
 }
 
 #' TractSeg Right Striato-Postcentral Tract
@@ -474,7 +586,11 @@ TractSeg_ST_POSTC_left <- function(subjects = NULL) {
 #' @inheritParams import_bundle
 #' @export
 TractSeg_ST_POSTC_right <- function(subjects = NULL) {
-  import_bundle("TractSeg", "Right Striato-Postcentral Tract", subjects = subjects)
+  import_bundle(
+    "TractSeg",
+    "Right Striato-Postcentral Tract",
+    subjects = subjects
+  )
 }
 
 #' TractSeg Left Striato-Precentral Tract
@@ -482,7 +598,11 @@ TractSeg_ST_POSTC_right <- function(subjects = NULL) {
 #' @inheritParams import_bundle
 #' @export
 TractSeg_ST_PREC_left <- function(subjects = NULL) {
-  import_bundle("TractSeg", "Left Striato-Precentral Tract", subjects = subjects)
+  import_bundle(
+    "TractSeg",
+    "Left Striato-Precentral Tract",
+    subjects = subjects
+  )
 }
 
 #' TractSeg Right Striato-Precentral Tract
@@ -490,7 +610,11 @@ TractSeg_ST_PREC_left <- function(subjects = NULL) {
 #' @inheritParams import_bundle
 #' @export
 TractSeg_ST_PREC_right <- function(subjects = NULL) {
-  import_bundle("TractSeg", "Right Striato-Precentral Tract", subjects = subjects)
+  import_bundle(
+    "TractSeg",
+    "Right Striato-Precentral Tract",
+    subjects = subjects
+  )
 }
 
 #' TractSeg Left Striato-Prefrontal Tract
@@ -498,7 +622,11 @@ TractSeg_ST_PREC_right <- function(subjects = NULL) {
 #' @inheritParams import_bundle
 #' @export
 TractSeg_ST_PREF_left <- function(subjects = NULL) {
-  import_bundle("TractSeg", "Left Striato-Prefrontal Tract", subjects = subjects)
+  import_bundle(
+    "TractSeg",
+    "Left Striato-Prefrontal Tract",
+    subjects = subjects
+  )
 }
 
 #' TractSeg Right Striato-Prefrontal Tract
@@ -506,7 +634,11 @@ TractSeg_ST_PREF_left <- function(subjects = NULL) {
 #' @inheritParams import_bundle
 #' @export
 TractSeg_ST_PREF_right <- function(subjects = NULL) {
-  import_bundle("TractSeg", "Right Striato-Prefrontal Tract", subjects = subjects)
+  import_bundle(
+    "TractSeg",
+    "Right Striato-Prefrontal Tract",
+    subjects = subjects
+  )
 }
 
 #' TractSeg Left Striato-Premotor Tract
@@ -538,7 +670,11 @@ TractSeg_T_OCC_left <- function(subjects = NULL) {
 #' @inheritParams import_bundle
 #' @export
 TractSeg_T_OCC_right <- function(subjects = NULL) {
-  import_bundle("TractSeg", "Right Thalamo-Occipital Tract", subjects = subjects)
+  import_bundle(
+    "TractSeg",
+    "Right Thalamo-Occipital Tract",
+    subjects = subjects
+  )
 }
 
 #' TractSeg Left Thalamo-Parietal Tract
@@ -562,7 +698,11 @@ TractSeg_T_PAR_right <- function(subjects = NULL) {
 #' @inheritParams import_bundle
 #' @export
 TractSeg_T_POSTC_left <- function(subjects = NULL) {
-  import_bundle("TractSeg", "Left Thalamo-Postcentral Tract", subjects = subjects)
+  import_bundle(
+    "TractSeg",
+    "Left Thalamo-Postcentral Tract",
+    subjects = subjects
+  )
 }
 
 #' TractSeg Right Thalamo-Postcentral Tract
@@ -570,7 +710,11 @@ TractSeg_T_POSTC_left <- function(subjects = NULL) {
 #' @inheritParams import_bundle
 #' @export
 TractSeg_T_POSTC_right <- function(subjects = NULL) {
-  import_bundle("TractSeg", "Right Thalamo-Postcentral Tract", subjects = subjects)
+  import_bundle(
+    "TractSeg",
+    "Right Thalamo-Postcentral Tract",
+    subjects = subjects
+  )
 }
 
 #' TractSeg Left Thalamo-Precentral Tract
@@ -578,7 +722,11 @@ TractSeg_T_POSTC_right <- function(subjects = NULL) {
 #' @inheritParams import_bundle
 #' @export
 TractSeg_T_PREC_left <- function(subjects = NULL) {
-  import_bundle("TractSeg", "Left Thalamo-Precentral Tract", subjects = subjects)
+  import_bundle(
+    "TractSeg",
+    "Left Thalamo-Precentral Tract",
+    subjects = subjects
+  )
 }
 
 #' TractSeg Right Thalamo-Precentral Tract
@@ -586,7 +734,11 @@ TractSeg_T_PREC_left <- function(subjects = NULL) {
 #' @inheritParams import_bundle
 #' @export
 TractSeg_T_PREC_right <- function(subjects = NULL) {
-  import_bundle("TractSeg", "Right Thalamo-Precentral Tract", subjects = subjects)
+  import_bundle(
+    "TractSeg",
+    "Right Thalamo-Precentral Tract",
+    subjects = subjects
+  )
 }
 
 #' TractSeg Left Thalamo-Prefrontal Tract
@@ -594,7 +746,11 @@ TractSeg_T_PREC_right <- function(subjects = NULL) {
 #' @inheritParams import_bundle
 #' @export
 TractSeg_T_PREF_left <- function(subjects = NULL) {
-  import_bundle("TractSeg", "Left Thalamo-Prefrontal Tract", subjects = subjects)
+  import_bundle(
+    "TractSeg",
+    "Left Thalamo-Prefrontal Tract",
+    subjects = subjects
+  )
 }
 
 #' TractSeg Right Thalamo-Prefrontal Tract
@@ -602,7 +758,11 @@ TractSeg_T_PREF_left <- function(subjects = NULL) {
 #' @inheritParams import_bundle
 #' @export
 TractSeg_T_PREF_right <- function(subjects = NULL) {
-  import_bundle("TractSeg", "Right Thalamo-Prefrontal Tract", subjects = subjects)
+  import_bundle(
+    "TractSeg",
+    "Right Thalamo-Prefrontal Tract",
+    subjects = subjects
+  )
 }
 
 #' TractSeg Left Thalamo-Premotor Tract
