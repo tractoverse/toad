@@ -29,14 +29,23 @@ This first release:
 - Ubuntu latest, R release
 - Ubuntu latest, R oldrel-1
 
-**R-Hub:**
-- The package is being checked on all available R-Hub platforms (36
-  platforms). This is submitted as part of the release process; results will
-  be appended here.
+**R-Hub (35/36 platforms):**
+- Checked on all available R-Hub platforms (35 platforms; `rchk` is
+  excluded — see below). 34 platforms report `Status: OK` (0 errors |
+  0 warnings | 0 notes) and the `vnu` platform (HTML validation) also
+  passes.
+- `rchk` is not part of the default matrix because the R-Hub check
+  container fails on a known upstream flake (`bcheck output file does not
+  exist`) before the as-cran check starts. See
+  https://github.com/r-hub/actions for the same precedent used by other
+  packages.
 
 **Win-builder:**
-- [win-builder](https://win-builder.r-project.org/) R release
-- [win-builder](https://win-builder.r-project.org/) R-devel
+- [win-builder](https://win-builder.r-project.org/) R release: 0 errors |
+  0 warnings | 1 NOTE (new submission; possibly misspelled words in
+  DESCRIPTION)
+- [win-builder](https://win-builder.r-project.org/) R-devel: submitted as
+  part of the release process
 
 ## R CMD check results
 
