@@ -44,8 +44,9 @@ This first release:
 - [win-builder](https://win-builder.r-project.org/) R release: 0 errors |
   0 warnings | 1 NOTE (new submission; possibly misspelled words in
   DESCRIPTION)
-- [win-builder](https://win-builder.r-project.org/) R-devel: submitted as
-  part of the release process
+- [win-builder](https://win-builder.r-project.org/) R-devel: 0 errors |
+  0 warnings | 1 NOTE (new submission; possibly misspelled words in
+  DESCRIPTION)
 
 ## R CMD check results
 
