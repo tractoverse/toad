@@ -152,11 +152,19 @@ expect_error(
 )
 
 # release not published -> .tractseg_subject_list returns character(0)
+# Match on conditionMessage() rather than expect_error's pattern argument:
+# cli_abort stores only the header line in the condition's `message` field
+# (the bullets live in `body` and are composed by conditionMessage()), and
+# tinytest <= 1.4.1 greps `e$message` while 1.4.3+ greps conditionMessage().
+# The pattern lives on the second (bulleted) line, so expect_error would pass
+# or fail depending on the installed tinytest version.
 orig_tsl <- mock_subjects(character(0L))
-expect_error(
+err <- tryCatch(
   import_bundle("TractSeg", "Left Arcuate Fasciculus"),
-  "may not have been published yet"
+  error = identity
 )
+expect_true(inherits(err, "error"))
+expect_true(grepl("may not have been published yet", conditionMessage(err)))
 restore_subjects(orig_tsl)
 
 # invalid subjects type
