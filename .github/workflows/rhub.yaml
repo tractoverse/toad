@@ -53,6 +53,14 @@ jobs:
         config: ${{ fromJson(needs.setup.outputs.containers) }}
     container:
       image: ${{ matrix.config.container }}
+    # toad ships .qmd vignettes, which R CMD build re-renders; the rhub
+    # check-containers do not come with Quarto, so install it from its
+    # self-contained tarball before running the check. The tarball needs only
+    # curl/wget/python3 + tar — no package manager or root — and works across
+    # the heterogeneous containers (some lack wget, some lack apt/sudo).
+    # Pinning avoids the flaky release-manifest fetch entirely.
+    env:
+      _R_CHECK_FORCE_SUGGESTS_: "false"
 
     steps:
       - uses: r-hub/actions/checkout@v1
@@ -60,10 +68,29 @@ jobs:
         with:
           token: ${{ secrets.RHUB_TOKEN }}
           job-config: ${{ matrix.config.job-config }}
+      - name: Install Quarto (tarball)
+        shell: bash
+        run: |
+          version=1.11.9
+          url="https://github.com/quarto-dev/quarto-cli/releases/download/v${version}/quarto-${version}-linux-amd64.tar.gz"
+          if command -v curl >/dev/null 2>&1; then
+            curl -fsSL "$url" -o /tmp/quarto.tar.gz
+          elif command -v wget >/dev/null 2>&1; then
+            wget -q -O /tmp/quarto.tar.gz "$url"
+          elif command -v python3 >/dev/null 2>&1; then
+            python3 -c "import urllib.request,sys; urllib.request.urlretrieve(sys.argv[1],'/tmp/quarto.tar.gz')" "$url"
+          else
+            echo "No curl, wget or python3 available to download Quarto" >&2
+            exit 1
+          fi
+          mkdir -p /tmp/quarto
+          tar -xzf /tmp/quarto.tar.gz -C /tmp/quarto --strip-components=1
+          echo "/tmp/quarto/bin" >> "$GITHUB_PATH"
       - uses: r-hub/actions/setup-deps@v1
         with:
           token: ${{ secrets.RHUB_TOKEN }}
           job-config: ${{ matrix.config.job-config }}
+          extra-packages: 'any::rcmdcheck, any::knitr, any::quarto, any::tinytest'
       - uses: r-hub/actions/run-check@v1
         with:
           token: ${{ secrets.RHUB_TOKEN }}
@@ -78,6 +105,10 @@ jobs:
       fail-fast: false
       matrix:
         config: ${{ fromJson(needs.setup.outputs.platforms) }}
+    # See the linux-containers job: the package ships .qmd vignettes, so Quarto
+    # is required to render them.
+    env:
+      _R_CHECK_FORCE_SUGGESTS_: "false"
 
     steps:
       - uses: r-hub/actions/checkout@v1
@@ -89,10 +120,19 @@ jobs:
         with:
           token: ${{ secrets.RHUB_TOKEN }}
           job-config: ${{ matrix.config.job-config }}
+      # Pin a specific Quarto release (instead of the quarto-actions default
+      # "release", which fetches the download manifest on every run and can be
+      # flaky on rhub). Quarto is required because the package ships .qmd
+      # vignettes, which R CMD check needs to render.
+      - uses: quarto-dev/quarto-actions/setup@v2
+        with:
+          version: '1.11.9'
+      # Hard dependencies plus vignette/test-build packages.
       - uses: r-hub/actions/setup-deps@v1
         with:
           job-config: ${{ matrix.config.job-config }}
           token: ${{ secrets.RHUB_TOKEN }}
+          extra-packages: 'any::rcmdcheck, any::knitr, any::quarto, any::tinytest'
       - uses: r-hub/actions/run-check@v1
         with:
           job-config: ${{ matrix.config.job-config }}
