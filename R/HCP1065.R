@@ -13,14 +13,14 @@
 #' @details The included bundles are stored as objects of class [fiber::bundle].
 #'  A [fiber::bundle] object is an S7 class which has two slots: `@streamlines`
 #'  and `@bundle_data`, where:
-#'  
+#'
 #'  - `@streamlines` is a list of [fiber::streamline] objects, which, in turn,
 #'  are S7 classes with slots `@points`, `@point_data` and `@streamline_data`.
 #'  - `@bundle_data` is a list of metadata about the bundle, such as its name,
 #'  where it was extracted from, etc.
-#' 
+#'
 #' More details about the format of the data can be found in the documentation
-#' of the [fiber](https://tractoverse.github.io/fiber/) package.
+#' of the [{fiber}](https://tractoverse.github.io/fiber/) package.
 #'
 #' @section HCP1065:
 #' A population-averaged tractography atlas based on 1,065 HCP subjects.
