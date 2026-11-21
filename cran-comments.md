@@ -1,6 +1,6 @@
 ## Submission
 
-This is the initial submission of **toad 1.0.0** (Tractography Open Atlas Data)
+This is the initial submission of **toad 0.1.0** (Tractography Open Atlas Data)
 to CRAN. The package previously lived under the name `mascot` and has been
 renamed as part of the tractoverse family of packages.
 
