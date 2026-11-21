@@ -19,7 +19,7 @@ knitr::opts_chunk$set(
 
 <!-- badges: start -->
 [![R-CMD-check](https://github.com/tractoverse/toad/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/tractoverse/toad/actions/workflows/R-CMD-check.yaml)
-[![Codecov test coverage](https://codecov.io/gh/tractoverse/toad/graph/badge.svg)](https://app.codecov.io/gh/tractoverse/toad)
+[![Codecov test coverage](https://codecov.io/gh/tractoverse/toad/branch/main/graph/badge.svg)](https://app.codecov.io/gh/tractoverse/toad)
 [![pkgdown](https://github.com/tractoverse/toad/actions/workflows/pkgdown.yaml/badge.svg)](https://github.com/tractoverse/toad/actions/workflows/pkgdown.yaml)
 [![CRAN status](https://www.r-pkg.org/badges/version/toad)](https://CRAN.R-project.org/package=toad)
 <!-- badges: end -->
